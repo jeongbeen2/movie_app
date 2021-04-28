@@ -1,13 +1,20 @@
 import React from 'react';
-import World from './world';
+import PropTypes from 'prop-types';
 
-function App() {
-  return (
-    <div>
-      <h1> hello!!!</h1>
-      <World />
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    movies: [],
+  };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 2000);
+  }
+  render() {
+    const { isLoading } = this.state;
+    return <div>{isLoading ? 'Loading' : 'We are ready'}</div>;
+  }
 }
 
 export default App;
