@@ -13,7 +13,9 @@ class App extends React.Component {
       data: {
         data: { movies },
       },
-    } = await axios.get('https://yts.mx/api/v2/list_movies.json');
+    } = await axios.get(
+      'https://yts-proxy.now.sh/list_movies.json?sort_by=rating'
+    );
     this.setState({ movies, isLoading: false }); // 여기의 movies는 불러온 데이터를 의미.
   };
   componentDidMount() {
@@ -31,17 +33,22 @@ class App extends React.Component {
             </div>
           ) : (
             <div className="movies">
-              {movies.map((movie) => (
-                <Movie
-                  key={movie.id}
-                  id={movie.id}
-                  year={movie.year}
-                  title={movie.title}
-                  summary={movie.summary}
-                  poster={movie.medium_cover_image}
-                  genres={movie.genres}
-                />
-              ))}
+              {movies.map(
+                (movie) => (
+                  console.log(movie.summary),
+                  (
+                    <Movie
+                      key={movie.id}
+                      id={movie.id}
+                      year={movie.year}
+                      title={movie.title}
+                      summary={movie.summary}
+                      poster={movie.medium_cover_image}
+                      genres={movie.genres}
+                    />
+                  )
+                )
+              )}
             </div>
           )}
         </div>
